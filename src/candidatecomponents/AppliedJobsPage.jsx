@@ -5,6 +5,7 @@ import {
   withdrawJobApplication,
 } from "../api/service2";
 import { toast } from "react-toastify";
+import { DashboardCard, DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const AppliedJobsPage = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
@@ -86,38 +87,21 @@ const AppliedJobsPage = () => {
 
   // Loader
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">Loading your applied jobs…</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading your applied jobs…" />;
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-left">
-      {/* HEADER */}
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-blue-900">Applied Jobs</h1>
-        <p className="text-blue-700 mt-1 text-sm sm:text-base">
-          Track and manage your job applications
+    <DashboardCard className="space-y-4">
+      {appliedJobs.length === 0 ? (
+        <p className="text-gray-600 text-center mt-6">
+          You haven’t applied to any jobs yet.
         </p>
-      </div>
-
-      {/* MAIN CARD */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 h-[70vh] overflow-y-auto space-y-4">
-        {appliedJobs.length === 0 ? (
-          <p className="text-gray-600 text-center mt-6">
-            You haven’t applied to any jobs yet.
-          </p>
-        ) : (
-          appliedJobs.map((job) => (
-            <div
-              key={job.id}
-              className="bg-white rounded-xl shadow p-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4 border border-gray-100"
-            >
+      ) : (
+        appliedJobs.map((job) => (
+          <div
+            key={job.id}
+            className="bg-white rounded-xl shadow p-4 sm:p-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4 border border-blue-100"
+          >
               {/* LEFT */}
               <div>
                 <h2 className="font-semibold text-lg text-gray-900">
@@ -144,8 +128,7 @@ const AppliedJobsPage = () => {
             </div>
           ))
         )}
-      </div>
-    </div>
+    </DashboardCard>
   );
 };
 

@@ -19,6 +19,7 @@ import {
   getSavedQueries,
 } from "../api/service2";
 import EmployerDetailsModalAllInfo from "./EmployerDetailsModalAllInfo";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 // Delete Modal Component
 const DeleteUserModal = ({ user, onClose, onSuccess }) => {
   const [loading, setLoading] = useState(false);
@@ -461,32 +462,31 @@ const EmployerList = () => {
   const totalPages = Math.ceil(totalUsers / usersPerPage);
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-4">
-      <div className="mx-auto">
-        <div className="bg-white rounded-xl shadow-lg border border-blue-100">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-5 px-6 border-b border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50">
-            <h2 className="text-2xl sm:text-3xl font-bold text-blue-900 text-left">
-              Users <span className="text-blue-600">({totalUsers})</span>
-            </h2>
+    <>
+    <DashboardCard padding={false} fill className="overflow-hidden">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 py-4 px-4 sm:px-6 border-b border-blue-100 bg-blue-50 flex-shrink-0">
+        <p className="text-blue-700 text-sm sm:text-base">
+          Total users:{" "}
+          <span className="font-semibold text-blue-900">{totalUsers}</span>
+        </p>
 
-            <select
-              value={selectedRole}
-              onChange={(e) => {
-                setSelectedRole(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="border border-blue-300 rounded-lg px-4 py-2.5 bg-white text-blue-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all w-full sm:w-auto"
-            >
-              <option value="SUPER_ADMIN">Super Admin</option>
-              <option value="EMPLOYER">Employer</option>
-              <option value="EMPLOYEE">Employee</option>
-            </select>
-          </div>
+        <select
+          value={selectedRole}
+          onChange={(e) => {
+            setSelectedRole(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="border border-blue-300 rounded-lg px-4 py-2.5 bg-white text-blue-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
+        >
+          <option value="SUPER_ADMIN">Super Admin</option>
+          <option value="EMPLOYER">Employer</option>
+          <option value="EMPLOYEE">Employee</option>
+        </select>
+      </div>
 
           {/* Loading State */}
           {loading && (
-            <div className="flex flex-col justify-center items-center h-[61vh] py-20 text-blue-600">
+            <div className="flex flex-col justify-center items-center py-20 text-blue-600 min-h-[200px]">
               <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4" />
               <p className="text-lg font-medium">Loading users...</p>
             </div>
@@ -494,7 +494,7 @@ const EmployerList = () => {
 
           {/* Empty State */}
           {!loading && users.length === 0 && (
-            <div className="flex flex-col h-[61vh] justify-center items-center py-20 text-gray-500">
+            <div className="flex flex-col justify-center items-center py-20 text-gray-500 min-h-[200px]">
               <Building2 size={64} className="text-blue-300 mb-4" />
               <p className="text-lg font-medium text-blue-900">
                 No users found
@@ -507,7 +507,7 @@ const EmployerList = () => {
 
           {/* Cards Grid */}
           {!loading && users.length > 0 && (
-            <div className="p-4 sm:p-6 h-[61vh] overflow-y-scroll overflow-x-hidden custom-scrollbar">
+            <div className="dashboard-nested-scroll p-4 sm:p-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {users.map((user) => (
                   <EmployerCard
@@ -556,8 +556,7 @@ const EmployerList = () => {
               </div>
             </div>
           )}
-        </div>
-      </div>
+    </DashboardCard>
       {/* Context Menu */}
       {showMenu && selectedUser && (
         <>
@@ -652,7 +651,7 @@ const EmployerList = () => {
           }}
         />
       )}
-    </div>
+    </>
   );
 };
 

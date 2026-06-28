@@ -4,6 +4,7 @@ import { Plus, Edit2, Trash2, ImageIcon } from "lucide-react";
 import CategoryModal from "./CategoryModal";
 import DeleteCategoryModal from "./DeleteCategoryModal";
 import { getAllCategories } from "../api/service2";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 
 // Main Component
 const CategorySections = () => {
@@ -36,31 +37,22 @@ const CategorySections = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <div className=" mx-auto">
-        {/* Header */}
-        <div className="bg-white shadow-lg p-6 mb-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Job Categories
-              </h1>
-              <p className="text-gray-600 mt-2">
-                Manage your job categories{" "}
-                <span className="font-semibold text-blue-600">
-                  ({totalCategories})
-                </span>
-              </p>
-            </div>
+    <>
+        <DashboardCard padding={false} className="mb-4 sm:mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 sm:p-5 lg:p-6">
+            <p className="text-blue-700 text-sm sm:text-base">
+              Total categories:{" "}
+              <span className="font-semibold text-blue-900">{totalCategories}</span>
+            </p>
             <button
               onClick={() => setShowAddModal(true)}
-              className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl font-medium"
+              className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-all font-medium w-full md:w-auto"
             >
               <Plus className="w-5 h-5" />
               Add Category
             </button>
           </div>
-        </div>
+        </DashboardCard>
 
         {/* Loading */}
         {loading && (
@@ -115,10 +107,7 @@ const CategorySections = () => {
 
         {/* Categories Grid */}
 
-        <div
-          className="overflow-y-auto px-4 max-h-[68vh]"
-          // style={{ maxHeight: "calc(100vh - 40vh)" }}
-        >
+        <div className="px-2 sm:px-4">
           {!loading && categories.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ml-4">
               {categories.map((category) => (
@@ -214,7 +203,6 @@ const CategorySections = () => {
             </div>
           )}
         </div>
-      </div>
 
       {/* Modals */}
       {showAddModal && (
@@ -261,7 +249,7 @@ const CategorySections = () => {
           animation: slide-in 0.3s ease-out;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

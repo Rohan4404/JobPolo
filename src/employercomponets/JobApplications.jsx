@@ -437,6 +437,7 @@ import {
   getSavedQueries,
 } from "../api/service2";
 import ProfileModal from "./ProfileModal";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 
 /* ---------------- STATUS BADGE ---------------- */
 const StatusBadge = ({ status }) => {
@@ -744,15 +745,12 @@ const JobApplications = () => {
   });
 
   return (
-    <div className="h-screen bg-gray-50 flex flex-col">
-      <div className="max-w-7xl mx-auto w-full flex flex-col flex-1 min-h-0">
-        {/* HEADER */}
-        <div className="bg-white border-b px-6 py-4 flex flex-wrap justify-between items-center gap-3">
+    <DashboardCard padding={false} className="flex flex-col flex-1 min-h-0 h-full overflow-hidden">
+      <div className="w-full flex flex-col flex-1 min-h-0">
+        {/* TOOLBAR */}
+        <div className="bg-white border-b border-blue-100 px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap justify-between items-center gap-3 flex-shrink-0">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">
-              Job Applications
-            </h1>
-            <p className="text-sm text-gray-500 mt-0.5 text-start">
+            <p className="text-sm text-blue-700 mt-0.5 text-start">
               {applications.length} application
               {applications.length !== 1 ? "s" : ""}
             </p>
@@ -1048,7 +1046,7 @@ const JobApplications = () => {
           onClose={() => setSelectedApplicant(null)}
         />
       )}
-    </div>
+    </DashboardCard>
   );
 };
 

@@ -64,16 +64,8 @@ const EmployerDashboardOverview = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 lg:p-4 text-start">
-      {/* HEADER */}
-      <div className="mb-8 text-start">
-        <h1 className="text-4xl font-bold text-blue-900">Employer Dashboard</h1>
-        <p className="text-blue-700 mt-2">Overview of your jobs & candidates</p>
-      </div>
-
-      <div className="h-[70vh] custom-scrollbar">
-        {/* STATS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 mb-6 sm:mb-8">
           {/* Total Jobs */}
           <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 hover:shadow-xl transition">
             <div className="flex items-center justify-between">
@@ -250,8 +242,7 @@ const EmployerDashboardOverview = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 

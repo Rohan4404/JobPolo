@@ -14,6 +14,7 @@ import { createOrUpdateEmployerJob, getAllCategories } from "../api/service2";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 
 export default function PostAJob() {
   const [formData, setFormData] = useState({
@@ -546,27 +547,8 @@ export default function PostAJob() {
     }
   };
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      <div className="mx-auto px-4 py-4">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 mb-4 shadow-lg text-left">
-          <div className="flex items-center gap-4">
-            <FaBriefcase className="text-white text-4xl" />
-            <div>
-              <h1 className="text-3xl font-bold text-white">Post a Job</h1>
-              <p className="text-blue-100 mt-1">
-                Find the perfect candidate for your team
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Form Container */}
-        <div className="bg-white  shadow-lg overflow-hidden space-y-4  h-[calc(100vh-36vh)] overflow-y-scroll custom-scrollbar ">
-          <form
-            onSubmit={handleSubmit}
-            className="divide-y divide-gray-100 text-left"
-          >
+    <DashboardCard padding={false} className="overflow-hidden">
+      <form onSubmit={handleSubmit} className="divide-y divide-blue-100 text-left pb-6">
             {/* Section 1: Basic Job Information */}
             <div className="p-8">
               <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -1506,8 +1488,6 @@ export default function PostAJob() {
               </button>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
+    </DashboardCard>
   );
 }

@@ -1085,11 +1085,11 @@ export default function EmployerSettings() {
       </div>
 
       {/* MAIN AREA */}
-      <div className="flex-1 overflow-hidden px-4 sm:px-6 py-6">
-        <div className="flex h-full gap-6">
-          {/* SIDEBAR (NO SCROLL) */}
-          <aside className="w-56 flex-shrink-0">
-            <nav className="bg-white rounded-xl border border-gray-200 shadow-sm h-full overflow-y-auto">
+      <div className="flex-1 overflow-hidden px-3 sm:px-4 md:px-6 py-4 sm:py-6">
+        <div className="flex flex-col lg:flex-row h-full gap-4 lg:gap-6">
+          {/* SIDEBAR — horizontal tabs on mobile, vertical on desktop */}
+          <aside className="w-full lg:w-56 flex-shrink-0">
+            <nav className="bg-white rounded-xl border border-gray-200 shadow-sm lg:h-full overflow-x-auto lg:overflow-y-auto flex lg:flex-col">
               {TABS.map((tab, idx) => {
                 const Icon = tab.icon;
                 const active = activeTab === tab.id;
@@ -1098,7 +1098,7 @@ export default function EmployerSettings() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm ${
+                    className={`flex-shrink-0 lg:w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 text-left text-xs sm:text-sm whitespace-nowrap ${
                       idx !== 0 ? "border-t border-gray-100" : ""
                     } ${
                       active

@@ -6,14 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BiLogOut } from "react-icons/bi";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { sendOtp } from "../api/authService";
 import { resetPassword } from "../api/service2";
 
 import { useSelector } from "react-redux";
 
-function EmployerHeader() {
+function EmployerHeader({ onMenuToggle, sidebarOpen }) {
   const { firstName, lastName, role } = useSelector((state) => state.user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
@@ -161,8 +161,23 @@ useEffect(() => {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row justify-between items-center p-3 sm:px-6 bg-[#ffffff] gap-4 sm:gap-0">
+      <div className="flex flex-row justify-between items-center px-3 sm:px-5 lg:px-6 py-3 bg-white border-b border-blue-100 gap-3 sm:gap-0 flex-shrink-0 z-50 relative shadow-sm">
         {/* Left section */}
+        <div className="flex items-center gap-3">
+          {onMenuToggle && (
+            <button
+              type="button"
+              onClick={onMenuToggle}
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label={sidebarOpen ? "Close menu" : "Open menu"}
+            >
+              {sidebarOpen ? (
+                <AiOutlineClose size={22} className="text-gray-700" />
+              ) : (
+                <AiOutlineMenu size={22} className="text-gray-700" />
+              )}
+            </button>
+          )}
         <Link to="/" className="flex items-center space-x-2">
           <img
             src="/icons/logo.png"
@@ -170,6 +185,7 @@ useEffect(() => {
             className="w-32 h-10 sm:w-36 sm:h-11 md:w-40 md:h-12 object-contain"
           />
         </Link>
+        </div>
 
         {/* Right section */}
         <div className="flex items-center space-x-5">

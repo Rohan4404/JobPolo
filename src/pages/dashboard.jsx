@@ -86,10 +86,7 @@ const triggerSearch = () => {
 };
 
   return (
-    <div
-      className="w-full min-h-screen custom-scrollbar flex flex-col gap-8"
-      style={{ maxHeight: "100vh", overflowY: "auto" }}
-    >
+    <div className="w-full min-h-screen custom-scrollbar flex flex-col">
       <section className="w-full">
         <Navbar />
       </section>

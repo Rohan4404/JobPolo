@@ -8,6 +8,7 @@ import {
 } from "chart.js";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import { getUserProfile } from "../api/service2";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -92,14 +93,7 @@ const ProfileOverview = () => {
   };
 
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">Loading profile overview...</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading profile overview..." />;
   }
 
   const pieData = {
@@ -114,20 +108,8 @@ const ProfileOverview = () => {
   };
 
   return (
-  <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6 min-h-screen">
-
-    {/* 🔷 HEADER */}
-    <div className="mb-8">
-      <h1 className="text-3xl font-bold text-gray-900">
-        Profile Overview
-      </h1>
-      <p className="text-gray-500 mt-1">
-        Track your profile completion & improve visibility 🚀
-      </p>
-    </div>
-
-    {/* 🔷 MAIN CARD */}
-    <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-200 p-6 h-full">
+  <div className="bg-white rounded-xl shadow-lg border border-blue-100 p-4 sm:p-6 pb-4">
+    <div className="bg-white/80 backdrop-blur-lg rounded-2xl border border-gray-200 p-4 sm:p-6">
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 

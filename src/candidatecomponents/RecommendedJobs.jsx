@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getJobs, getUserProfile } from "../api/service2";
 import JobListCard from "./JobListCard";
+import { DashboardCard, DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const RecommendedJobs = () => {
   const [recommended, setRecommended] = useState([]);
@@ -95,38 +96,16 @@ const RecommendedJobs = () => {
 
   // 🔄 LOADER (same CSS system)
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">
-            Finding best jobs for you…
-          </p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Finding best jobs for you…" />;
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-left">
-
-      {/* HEADER — SAME AS CandidateJobsPage */}
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-blue-900">
-          Recommended Jobs
-        </h1>
-        <p className="text-blue-700 mt-1 text-sm sm:text-base">
-          Jobs curated based on your profile
+    <DashboardCard className="space-y-4">
+      {recommended.length === 0 ? (
+        <p className="text-gray-600 text-center mt-6">
+          No recommended jobs found yet.
         </p>
-      </div>
-
-      {/* MAIN CARD */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 h-[70vh] overflow-y-auto space-y-4">
-        {recommended.length === 0 ? (
-          <p className="text-gray-600 text-center mt-6">
-            No recommended jobs found yet.
-          </p>
-        ) : (
+      ) : (
           recommended.map((job) => (
             <div key={job.id} className="relative">
 
@@ -152,8 +131,7 @@ const RecommendedJobs = () => {
             </div>
           ))
         )}
-      </div>
-    </div>
+    </DashboardCard>
   );
 };
 

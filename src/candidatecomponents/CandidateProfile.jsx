@@ -312,6 +312,7 @@
 import React, { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, X } from "lucide-react";
 import { getUserProfile } from "../api/service2";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const CandidateProfile = () => {
   const [profile, setProfile] = useState(null);
@@ -336,21 +337,12 @@ const CandidateProfile = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">Loading profile...</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading profile..." />;
   }
 
   if (!profile) {
     return (
-      <div className="flex justify-center items-center h-[80vh] text-blue-700">
-        No profile found
-      </div>
+      <p className="text-blue-700 text-center py-10">No profile found</p>
     );
   }
 
@@ -394,11 +386,9 @@ const CandidateProfile = () => {
 );
 
   return (
-  <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 min-h-screen">
-    <div className="mx-auto">
-
-      {/* 🔷 HEADER (Same style as Employer) */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-8 mb-6 text-left">
+  <>
+      {/* Banner */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 text-left">
         <div className="flex items-center gap-6">
           <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-blue-600 text-4xl font-bold shadow-xl">
             {fullName.charAt(0)}
@@ -419,8 +409,8 @@ const CandidateProfile = () => {
         </div>
       </div>
 
-      {/* 🔷 MAIN GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[60vh] overflow-y-auto custom-scrollbar text-left">
+      {/* Main grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 pb-4 text-left">
 
         {/* LEFT SIDE */}
        {/* LEFT COLUMN */}
@@ -579,9 +569,8 @@ const CandidateProfile = () => {
 
 </div>
       </div>
-    </div>
 
-    {/* 🔥 POPUP (UNCHANGED) */}
+    {/* Popup */}
     {popupOpen && (
       <div className="fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center">
         <div className="bg-white w-[90vw] h-[90vh] rounded-xl shadow-lg flex flex-col">
@@ -616,7 +605,7 @@ const CandidateProfile = () => {
         </div>
       </div>
     )}
-  </div>
+  </>
 );
 };
 

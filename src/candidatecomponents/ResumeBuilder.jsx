@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import html2pdf from "html2pdf.js";
 import { Download, Eye, Sparkles, FileText, Briefcase, GraduationCap, Award, Code, User, Mail, Phone, MapPin, Linkedin, Github, Trash2, Plus, Wand2, Star, TrendingUp } from "lucide-react";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 /////
 const ResumeBuilder = () => {
   const previewRef = useRef(null);
@@ -281,41 +282,15 @@ const ResumeBuilder = () => {
 
   // Loading state
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">Resume Builder Pro...</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading resume builder..." />;
   }
 
   return (
- <div className="w-full  flex flex-col min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 text-left">
-
-
-
-
-
-      {/* Floating Header */}
-     <div className="w-full h-full flex flex-col">
-        
-         
-        
-
-{/* Main Content */}
-<div className="flex-1">
-
-
-
-  {/* RIGHT CONTENT */}
-  
-    
-    <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 h-[82vh] flex-1 flex flex-col">
-     <div className="flex flex-wrap gap-4 justify-between items-center">
+    <>
+    <div className="bg-white rounded-xl shadow-lg border border-blue-100 p-4 sm:p-6 flex flex-col pb-4 text-left">
+     <div className="flex flex-wrap gap-4 justify-between items-center mb-4 pb-4 border-b border-blue-100">
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent flex items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent flex items-center gap-3">
                 <Sparkles className="text-indigo-500" />
                 Resume Builder Pro
               </h1>
@@ -452,8 +427,8 @@ const ResumeBuilder = () => {
     );
   })}
 </div>
-      {/* 🔥 ONLY THIS PART SCROLLS (NOT PAGE) */}
-      <div className="flex-1 overflow-y-auto pr-2 space-y-6">
+      {/* Form sections */}
+      <div className="space-y-6">
 
                 {/* Personal Details */}
                 {activeTab === "personal" && (
@@ -904,11 +879,8 @@ const ResumeBuilder = () => {
                     </div>
                   </div>
                 )}
-              </div>
-            </div>
-          
-        </div>
       </div>
+    </div>
 
       {/* Preview Modal */}
       {previewOpen && (
@@ -1139,7 +1111,7 @@ const ResumeBuilder = () => {
         
         
       `}</style>
-    </div>
+    </>
   );
 };
 

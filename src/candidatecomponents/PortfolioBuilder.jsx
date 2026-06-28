@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Plus, Trash2, Eye, Download, Save, Grid, Layout, Palette, Image, Link as LinkIcon, Type, Upload } from "lucide-react";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const PortfolioBuilder = () => {
   const [portfolioName, setPortfolioName] = useState("My Portfolio");
@@ -230,7 +231,7 @@ const PortfolioBuilder = () => {
 
   const renderPreview = () => {
     return (
-      <div className={`min-h-screen ${currentTheme.bg} ${currentTheme.text}`}>
+      <div className={`${currentTheme.bg} ${currentTheme.text}`}>
         {/* Hero Section */}
         <section className={`py-20 px-8 text-center ${
           portfolio.hero.backgroundStyle === "gradient" 
@@ -359,43 +360,28 @@ const PortfolioBuilder = () => {
   };
 
   if (loading) {
-    return (
-      <div className="section-loader min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="flex flex-col items-center">
-          {/* Using custom Tailwind classes for spinner animation */}
-          <div className="page-loader-spinner mb-3 w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="page-loader-text text-gray-700">Loading portfolio builder...</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading portfolio builder..." />;
   }
 
   if (currentView === "preview") {
     return (
-      <div className="min-h-screen">
-        <div className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 px-6 py-4 flex justify-between items-center">
-          <h2 className="text-xl font-bold">{portfolioName}</h2>
+      <div className="pb-4">
+        <div className="sticky top-0 bg-white shadow-md z-10 px-4 sm:px-6 py-3 flex flex-wrap justify-between items-center gap-3 mb-4 rounded-xl border border-blue-100">
+          <h2 className="text-lg sm:text-xl font-bold text-blue-900">{portfolioName}</h2>
           <button
             onClick={() => setCurrentView("editor")}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
           >
             Back to Editor
           </button>
         </div>
-        <div className="pt-20">
-          {renderPreview()}
-        </div>
+        {renderPreview()}
       </div>
     );
   }
 
   return (
-      <div className="w-full min-h-screen flex flex-col overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-    <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
-      {/* Header */}
-    
-  <div className="bg-white rounded-xl shadow-lg border border-blue-100 h-[82vh] flex flex-col overflow-hidden p-6">
-        
+    <div className="bg-white rounded-xl shadow-lg border border-blue-100 p-4 sm:p-6 flex flex-col pb-4">
           <div className="flex flex-wrap justify-between items-center gap-4 mb-4 pb-4 border-b border-blue-100">
 
   {/* LEFT */}
@@ -485,8 +471,7 @@ const PortfolioBuilder = () => {
 </div>
 
   
-          {/* h-full ensures this inner div uses the full height of the parent (70vh) minus padding, allowing content inside to scroll correctly. */}
-          <div className="flex-1 overflow-y-auto space-y-8 pr-2 min-h-0">
+          <div className="space-y-8">
             
             {/* Hero Section */}
             <section className="border-b pb-8">
@@ -741,10 +726,7 @@ const PortfolioBuilder = () => {
               </div>
             </section>
           </div>
-      
-</div> 
 
-</div> 
       {/* Saved Portfolios Sidebar */}
       {savedPortfolios.length > 0 && (
         <div className="max-w-7xl mx-auto mt-6">

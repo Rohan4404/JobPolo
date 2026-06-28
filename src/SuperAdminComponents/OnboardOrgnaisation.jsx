@@ -10,6 +10,7 @@ import {
 import { sendOtp } from "../api/authService";
 import { employeerRegister } from "../api/service2";
 import { toast } from "react-toastify";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 
 export default function EmployerOnboard() {
   const [showPassword, setShowPassword] = useState(false);
@@ -132,21 +133,20 @@ export default function EmployerOnboard() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 ">
-      <div className=" mx-auto">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-xl p-6 rounded-t-xl relative overflow-hidden">
-          <div className="relative z-10 flex items-center gap-3">
-            <FaUser className="text-white text-3xl" />
-            <h1 className="text-4xl font-bold text-white">User Onboarding</h1>
-          </div>
+    <DashboardCard padding={false} fill className="overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-sm px-4 sm:px-6 py-4 sm:py-5 rounded-t-xl flex-shrink-0">
+        <div className="flex items-center gap-3">
+          <FaUser className="text-white text-2xl sm:text-3xl flex-shrink-0" />
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
+            Registration Form
+          </h2>
         </div>
+      </div>
 
-        {/* FORM */}
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white shadow-xl p-8 rounded-b-xl space-y-8 overflow-y-auto max-h-[75vh] custom-scrollbar"
-        >
+      <form
+        onSubmit={handleSubmit}
+        className="dashboard-nested-scroll bg-white shadow-sm rounded-b-xl p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8"
+      >
           {/* Main Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-start">
             {/* ROLE */}
@@ -569,8 +569,7 @@ export default function EmployerOnboard() {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+    </DashboardCard>
   );
 }
 // import React, { useState } from "react";

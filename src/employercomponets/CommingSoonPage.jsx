@@ -54,9 +54,7 @@ const ComingSoon = () => {
   };
 
   return (
-    <div className="h-[86vh] overflow-y-auto bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 flex flex-col items-center justify-start py-6 relative">
-      {/* Restored h-[73vh] and overflow-y-auto; changed justify-center to justify-start to ensure top elements are visible */}
-      {/* Added flex-col and py-6 for better content alignment and spacing */}
+    <div className="h-full min-h-0 dashboard-nested-scroll bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 flex flex-col items-center justify-start py-4 sm:py-6 relative">
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">

@@ -263,7 +263,7 @@ const handleProtectedNavigation = (path) => {
 >
   {/* Resume Builder */}
   <div
-    onClick={() => handleProtectedNavigation("/dashboard?tab=Resume Builder")}
+    onClick={() => handleProtectedNavigation("/dashboard/resume-builder")}
     className="flex-1 bg-white shadow-md rounded-xl p-5 cursor-pointer hover:shadow-xl transition group"
   >
     <h3 className="text-lg font-semibold text-black mb-1">
@@ -277,7 +277,7 @@ const handleProtectedNavigation = (path) => {
   {/* Interview Prep */}
   <div
     onClick={() =>
-      handleProtectedNavigation("/dashboard?tab=Interview Preparation")
+      handleProtectedNavigation("/dashboard/interview-preparation")
     }
     className="flex-1 bg-white shadow-md rounded-xl p-5 cursor-pointer hover:shadow-xl transition group"
   >

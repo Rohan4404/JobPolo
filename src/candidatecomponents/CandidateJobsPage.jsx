@@ -107,6 +107,7 @@
 import React, { useEffect, useState } from "react";
 import { getJobs, getSavedQueries, getAppliedJobs } from "../api/service2";
 import JobListCard from "./JobListCard";
+import { DashboardCard, DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const CandidateJobsPage = () => {
   const [jobs, setJobs] = useState([]);
@@ -155,38 +156,20 @@ const CandidateJobsPage = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">Loading jobs...</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading jobs..." />;
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-left">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-blue-900">
-          Find Your Dream Job
-        </h1>
-        <p className="text-blue-700 mt-1">
-          Browse the latest opportunities perfect for you
-        </p>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-lg p-6 h-[70vh] overflow-y-auto space-y-4">
-        {jobs.map((job) => (
-          <JobListCard
-            key={job.id}
-            job={job}
-            isSaved={savedJobs.includes(job.id)}
-            isApplied={appliedJobs.includes(job.id)}
-          />
-        ))}
-      </div>
-    </div>
+    <DashboardCard className="space-y-4">
+      {jobs.map((job) => (
+        <JobListCard
+          key={job.id}
+          job={job}
+          isSaved={savedJobs.includes(job.id)}
+          isApplied={appliedJobs.includes(job.id)}
+        />
+      ))}
+    </DashboardCard>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 import {
   ArrowRight,
   Bookmark,
@@ -71,22 +72,14 @@ const SavedCandidates = () => {
   };
 
   return (
-    <div className=" bg-white ">
-      <div className="max-w-7xl mx-4">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-gray-900">Saved Candidates</h1>
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <div className="w-4 h-4 border-2 border-gray-400 rounded-full flex items-center justify-center">
-              <span className="text-xs">i</span>
-            </div>
-            <span>All of the candidates are visible until 24 march, 2021</span>
-          </div>
-        </div>
+    <DashboardCard className="space-y-2">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-2 flex-shrink-0">
+        <p className="text-sm text-blue-700">
+          All candidates visible until 24 March, 2021
+        </p>
+      </div>
 
-        {/* Candidates List */}
-        <div className="space-y-2 h-[78vh] overflow-y-auto">
-          {candidates.map((candidate) => (
+      {candidates.map((candidate) => (
             <div
               key={candidate.id}
               className={`flex items-center justify-between p-4 rounded-lg border transition-all ${
@@ -165,9 +158,7 @@ const SavedCandidates = () => {
               </div>
             </div>
           ))}
-        </div>
-      </div>
-    </div>
+    </DashboardCard>
   );
 };
 

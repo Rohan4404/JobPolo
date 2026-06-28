@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Map, CheckCircle, Circle, Brain, Star } from "lucide-react";
 import { getUserProfile, getJobs } from "../api/service2";
+import { DashboardCard, DashboardLoader } from "../components/dashboard/DashboardUI";
 
 /* ================= ROADMAP SOURCES ================= */
 
@@ -127,45 +128,26 @@ const InterviewPreparation = () => {
   /* ================= LOADER ================= */
 
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">
-            Preparing your interview roadmap...
-          </p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Preparing your interview roadmap..." />;
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-left">
-
-      {/* HEADER */}
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-blue-900 flex items-center gap-2">
-          <Map />
-          Interview Preparation
-        </h1>
-        <p className="text-blue-700 mt-2">
-          Industry roadmap for <strong>{industry || "your profile"}</strong>
+    <>
+      <div className="mb-4 sm:mb-6 flex-shrink-0">
+        <p className="text-blue-700 text-sm sm:text-base">
+          Industry roadmap for{" "}
+          <strong className="text-blue-900">{industry || "your profile"}</strong>
         </p>
-
-        {/* PROGRESS */}
-        <div className="mt-4 bg-gray-200 rounded-full h-3 overflow-hidden">
+        <div className="mt-3 bg-blue-100 rounded-full h-3 overflow-hidden">
           <div
-            className="h-3 bg-gradient-to-r from-green-500 to-emerald-600 transition-all"
+            className="h-3 bg-gradient-to-r from-blue-500 to-blue-700 transition-all"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
-        <p className="text-sm text-gray-600 mt-1">
-          Progress: {progressPercent}%
-        </p>
+        <p className="text-sm text-blue-600 mt-1">Progress: {progressPercent}%</p>
       </div>
 
-      {/* MAIN CARD (MATCHES CandidateProfile) */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 h-[65vh] overflow-y-auto">
+      <DashboardCard>
 
         <h3 className="text-lg font-bold text-blue-900 border-b-2 border-blue-500 pb-2 mb-4">
           Roadmap Steps
@@ -231,8 +213,8 @@ const InterviewPreparation = () => {
             No roadmap available for this industry yet.
           </p>
         )}
-      </div>
-    </div>
+      </DashboardCard>
+    </>
   );
 };
 

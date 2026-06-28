@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { X, FileText, Image as ImageIcon } from "lucide-react";
 import { getUserProfile } from "../api/service2";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const Documents = () => {
   const [documents, setDocuments] = useState(null);
@@ -25,21 +26,12 @@ const Documents = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">Loading documents...</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading documents..." />;
   }
 
   if (!documents) {
     return (
-      <div className="flex justify-center items-center h-[80vh] text-blue-700">
-        No documents found
-      </div>
+      <p className="text-blue-700 text-center py-10">No documents found</p>
     );
   }
 
@@ -53,21 +45,8 @@ const Documents = () => {
   /* ================= UI ================= */
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-left min-h-screen overflow-y-auto">
-
-
-      {/* HEADER */}
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-blue-900">Documents</h1>
-        <p className="text-blue-700 mt-2">
-          View and download your uploaded documents
-        </p>
-      </div>
-
-      {/* CARD */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 space-y-10 max-h-[70vh] overflow-y-auto">
-
-
+    <>
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-blue-100 space-y-8 sm:space-y-10 pb-4">
         {/* RESUMES */}
         <DocumentSection
           title="Resumes"
@@ -148,7 +127,7 @@ const Documents = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

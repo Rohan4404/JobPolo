@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Bell, Trash2, Mail, Smartphone } from "lucide-react";
 import { getJobs } from "../api/service2";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 
 const JobAlert = () => {
   const [alerts, setAlerts] = useState([]);
@@ -54,21 +55,8 @@ const JobAlert = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-left">
-
-      {/* HEADER */}
-      <div className="mb-6 flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-blue-900 flex items-center gap-2">
-            <Bell className="text-blue-700" />
-            Job Alerts
-          </h1>
-          <p className="text-blue-700 mt-1">
-            New jobs posted today for you
-          </p>
-        </div>
-
-        {/* ENABLE / DISABLE */}
+    <>
+      <div className="mb-4 flex justify-end flex-shrink-0">
         <button
           onClick={() => setEnabled(!enabled)}
           className={`px-4 py-2 rounded-lg text-sm font-semibold ${
@@ -81,8 +69,7 @@ const JobAlert = () => {
         </button>
       </div>
 
-      {/* MAIN CARD */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 h-[70vh] overflow-y-auto">
+      <DashboardCard>
 
         {/* FILTERS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -175,8 +162,8 @@ const JobAlert = () => {
             </label>
           </div>
         </div>
-      </div>
-    </div>
+      </DashboardCard>
+    </>
   );
 };
 

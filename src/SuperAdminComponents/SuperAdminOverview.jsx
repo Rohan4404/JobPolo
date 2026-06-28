@@ -104,19 +104,8 @@ const SuperAdminOverview = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100  p-4 sm:p-6 lg:p-4 text-start">
-      {/* HEADER */}
-      <div className="mb-8 text-start">
-        <h1 className="text-4xl font-bold text-blue-900 ">
-          Super Admin Dashboard
-        </h1>
-        <p className="text-blue-700 mt-2">System Overview & Analytics</p>
-      </div>
-
-      {/* STATS GRID */}
-
-      <div className="h-[70vh] custom-scrollbar ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 mb-6 sm:mb-8">
           {/* Total Users */}
           <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 hover:shadow-xl transition">
             <div className="flex items-center justify-between">
@@ -408,8 +397,7 @@ const SuperAdminOverview = () => {
             </table>
           </div>
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 

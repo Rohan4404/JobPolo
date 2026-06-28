@@ -9,7 +9,70 @@
 #root {
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
+}
+
+html.dashboard-active,
+html.dashboard-active body {
+  height: 100%;
+  overflow: hidden;
+}
+
+html.dashboard-active #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+html.dashboard-active .dashboard-slot > * {
+  max-height: 100%;
+  height: 100%;
+}
+
+.dashboard-scroll-area,
+.dashboard-nested-scroll {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.dashboard-page-body {
+  flex: 1 1 0%;
+  min-height: 0;
+}
+
+/* ── Unified dashboard page UI ── */
+.dashboard-page {
+  background: linear-gradient(to bottom right, #eff6ff, #eef2ff, #dbeafe);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .dashboard-page {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-page {
+    padding: 1.25rem;
+  }
+}
+
+.dashboard-card {
+  box-shadow: 0 4px 6px -1px rgb(59 130 246 / 0.08), 0 2px 4px -2px rgb(59 130 246 / 0.06);
+}
+
+html.dashboard-active .section-loader,
+html.dashboard-active .page-loader {
+  min-height: unset;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ==============Theme Variables================ */
@@ -96,7 +159,9 @@
 
 /* ==========Scrollbar Styles=========== */
 .custom-scrollbar {
-  overflow-y: auto; /* Ensure vertical scrolling */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #e0e7ff;
 }
 
 /* WebKit-based browsers (Chrome, Safari, Edge) */

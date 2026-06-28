@@ -93,24 +93,12 @@ const ActivityLog = () => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-left">
-      {/* HEADER */}
-      <div className="mb-6 flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-blue-900 flex items-center gap-2">
-            <Clock className="text-blue-700" />
-            Activity Log
-          </h1>
-          <p className="text-blue-700 mt-1">
-            Track everything you do on Job Polo
-          </p>
-        </div>
-
-        {/* FILTER */}
+    <>
+      <div className="mb-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 flex-shrink-0">
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="border rounded-lg px-4 py-2 text-sm"
+          className="border border-blue-200 rounded-lg px-4 py-2 text-sm text-blue-900 focus:ring-2 focus:ring-blue-300 outline-none"
         >
           <option value="all">All Activities</option>
           <option value="job">Job Activities</option>
@@ -120,8 +108,7 @@ const ActivityLog = () => {
         </select>
       </div>
 
-      {/* MAIN CARD */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 h-[70vh] overflow-y-auto">
+      <DashboardCard>
         {filteredActivities.length > 0 ? (
           <div className="space-y-4">
             {filteredActivities.map((activity) => (
@@ -152,8 +139,8 @@ const ActivityLog = () => {
             No activity found
           </p>
         )}
-      </div>
-    </div>
+      </DashboardCard>
+    </>
   );
 };
 

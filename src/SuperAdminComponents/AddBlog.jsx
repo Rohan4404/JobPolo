@@ -249,8 +249,7 @@ const AddBlog = () => {
         {/* Cards */}
         {/* Cards */}
         {!loading && posts.length > 0 && (
-          <div className="h-[70vh] overflow-y-auto px-4 custom-scrollbar">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 pb-4">
               {posts.map((post) => (
                 <div
                   key={post.id}
@@ -319,7 +318,6 @@ const AddBlog = () => {
                   </div>
                 </div>
               ))}
-            </div>
           </div>
         )}
 

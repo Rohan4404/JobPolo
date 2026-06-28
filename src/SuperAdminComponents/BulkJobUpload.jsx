@@ -374,27 +374,8 @@ export default function BulkJobUpload() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
-      <div className="mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-6 text-start">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="bg-indigo-600 p-3 rounded-lg">
-              <Upload className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800">
-                Bulk Job Upload
-              </h1>
-              <p className="text-gray-600 mt-1">
-                Upload multiple jobs using Excel and company logos
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Upload Section */}
-        <div className="bg-white rounded-xl shadow-lg p-8 h-[60vh] custom-scrollbar">
+    <>
+        <div className="bg-white rounded-xl shadow-lg border border-blue-100 p-4 sm:p-6 lg:p-8">
           {uploadResult && (
             <div className="bg-gray-50 border rounded-lg p-4 mb-6 grid grid-cols-2 md:grid-cols-5 gap-4 text-sm font-medium">
               <div>Total Jobs: {uploadResult.totalJobsInExcel}</div>
@@ -533,7 +514,6 @@ export default function BulkJobUpload() {
             {bulkUploading ? "Uploading..." : "Upload Bulk Jobs"}
           </button>
         </div>
-      </div>
-    </div>
+    </>
   );
 }

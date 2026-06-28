@@ -19,13 +19,16 @@ import UpdateJobModal from "./UpadteJobsModal";
 import DeleteJobModal from "./DeleteJobs";
 
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { getDashboardPath } from "../config/dashboardNav";
+import { DashboardCard } from "../components/dashboard/DashboardUI";
 
 const JobRow = ({
   job,
-  setActiveTab,
   isSelected,
   onMenuClick,
   applicationCounts,
+  onViewApplications,
 }) => (
   <div
     className={`flex flex-col sm:flex-row sm:items-center sm:justify-between px-4 py-4 border-b hover:bg-gray-50 ${
@@ -81,10 +84,7 @@ const JobRow = ({
 
     <div className="sm:w-1/5 flex items-center gap-2 justify-start">
       <button
-        onClick={() => {
-          sessionStorage.setItem("selectedJobId", job.id);
-          setActiveTab("Job Applications");
-        }}
+        onClick={() => onViewApplications(job.id)}
         className="relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-blue-600 rounded whitespace-nowrap group"
       >
         View Applications
@@ -101,8 +101,13 @@ const JobRow = ({
   </div>
 );
 
-const MyJobs = ({ setActiveTab }) => {
-  // console.log("set actgive tab is", setActiveTab);
+const MyJobs = () => {
+  const navigate = useNavigate();
+
+  const handleViewApplications = (jobId) => {
+    sessionStorage.setItem("selectedJobId", jobId);
+    navigate(getDashboardPath("Job Applications"));
+  };
   const [jobs, setJobs] = useState([]);
   const [totalJobs, setTotalJobs] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -269,14 +274,12 @@ const MyJobs = ({ setActiveTab }) => {
   };
 
   return (
-    <div className="bg-gray-50">
-      <div className="w-full">
-        <div className="bg-white rounded-lg shadow min-w-full flex flex-col flex-1 max-h-[87vh]">
+    <DashboardCard padding={false} className="flex flex-col flex-1 min-h-0 h-full overflow-hidden">
           {/* HEADER + FILTER SECTION */}
-          <div className="py-4 px-4 border-b">
+          <div className="py-3 sm:py-4 px-3 sm:px-4 border-b flex-shrink-0">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-xl font-semibold text-gray-900">
-                My Jobs <span className="text-gray-500">({totalJobs})</span>
+              <h2 className="text-lg sm:text-xl font-semibold text-blue-900">
+                My Jobs <span className="text-blue-600">({totalJobs})</span>
               </h2>
 
               <div className="flex items-center gap-2">
@@ -377,7 +380,7 @@ const MyJobs = ({ setActiveTab }) => {
           </div>
 
           {/* TABLE HEADER */}
-          <div className="hidden sm:flex items-center justify-between px-4 py-3 bg-gray-50 text-xs font-medium text-gray-600 border-b">
+          <div className="hidden sm:flex items-center justify-between px-4 py-3 bg-gray-50 text-xs font-medium text-gray-600 border-b flex-shrink-0">
             <div className="w-1/3 text-left">JOBS</div>
             <div className="w-1/5 text-left">STATUS</div>
             <div className="w-1/5 text-left">APPLICATIONS</div>
@@ -386,7 +389,7 @@ const MyJobs = ({ setActiveTab }) => {
 
           {/* LIST */}
           {!loading && jobs.length > 0 && (
-            <div className="flex-1 overflow-y-auto text-left">
+            <div className="flex-1 min-h-0 overflow-y-auto text-left custom-scrollbar">
               {jobs.map((job) => (
                 <JobRow
                   key={job.id}
@@ -397,7 +400,7 @@ const MyJobs = ({ setActiveTab }) => {
                   isSelected={selectedJob?.id === job.id}
                   onMenuClick={handleMenuClick}
                   applicationCounts={applicationCounts}
-                  setActiveTab={setActiveTab}
+                  onViewApplications={handleViewApplications}
                 />
               ))}
             </div>
@@ -417,7 +420,7 @@ const MyJobs = ({ setActiveTab }) => {
 
           {/* PAGINATION */}
           {!loading && totalJobs > 0 && (
-            <div className="flex justify-center items-center gap-3 p-3 border-t bg-white">
+            <div className="flex justify-center items-center gap-3 p-3 border-t bg-white flex-shrink-0">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
@@ -449,8 +452,6 @@ const MyJobs = ({ setActiveTab }) => {
               </button>
             </div>
           )}
-        </div>
-      </div>
 
       {/* 🌟 MENU DROPDOWN */}
       {showMenu && selectedJob && (
@@ -549,7 +550,7 @@ const MyJobs = ({ setActiveTab }) => {
           onSuccess={fetchJobs}
         />
       )}
-    </div>
+    </DashboardCard>
   );
 };
 

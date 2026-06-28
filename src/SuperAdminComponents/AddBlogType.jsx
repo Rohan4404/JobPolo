@@ -142,7 +142,7 @@ const BlogTypeList = () => {
 
         {/* Blog Type Cards */}
         {!loading && blogTypes.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 max-h-[68vh]  custom-scrollbar">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 pb-4">
             {blogTypes.map((blogType) => (
               <div
                 key={blogType.id}

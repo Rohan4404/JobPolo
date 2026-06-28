@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getUserProfile } from "../api/service2";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const CareerPreference = () => {
   const [industry, setIndustry] = useState("");
@@ -56,43 +57,24 @@ const CareerPreference = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="section-loader">
-        <div className="flex flex-col items-center">
-          <div className="page-loader-spinner mb-3"></div>
-          <p className="page-loader-text">Loading market news...</p>
-        </div>
-      </div>
-    );
+    return <DashboardLoader message="Loading market news..." />;
   }
 
   if (!industry) {
     return (
-      <div className="flex justify-center items-center h-[80vh] text-blue-700">
+      <p className="text-blue-700 text-center py-10">
         Industry not set in profile
-      </div>
+      </p>
     );
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 
-                    p-4 sm:p-6 text-left h-full overflow-y-auto overflow-x-hidden">
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-blue-100 space-y-4 sm:space-y-6 pb-4 w-full max-w-full">
+      <p className="text-blue-700 text-sm sm:text-base">
+        Latest market news for <strong>{industry}</strong>
+      </p>
 
-      {/* HEADER */}
-      <div className="mb-6 max-w-full">
-        <h1 className="text-3xl font-bold text-blue-900">
-          Career Preferences
-        </h1>
-        <p className="text-blue-700 mt-2">
-          Latest market news for <strong>{industry}</strong>
-        </p>
-      </div>
-
-      {/* NEWS LIST */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-blue-100 
-                      space-y-6 max-h-[70vh] overflow-y-auto 
-                      w-full max-w-full overflow-x-hidden">
-
+      <div className="space-y-4 sm:space-y-6 w-full max-w-full">
         {news.length > 0 ? (
           news.map((item, index) => (
             <div

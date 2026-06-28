@@ -15,7 +15,8 @@ import {
   FaDollarSign,
   FaUsers,
 } from "react-icons/fa";
-import { getUserProfile } from "../api/service2"; // <-- REAL API
+import { getUserProfile } from "../api/service2";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const EmployerProfile = () => {
   const [profile, setProfile] = useState(null);
@@ -40,60 +41,48 @@ const EmployerProfile = () => {
     loadData();
   }, []);
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-xl text-gray-700 font-semibold">
-            Loading profile...
-          </p>
-        </div>
-      </div>
-    );
+  if (loading) return <DashboardLoader message="Loading profile..." />;
 
-  if (!profile)
+  if (!profile) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <p className="text-xl text-gray-700">No employer profile data found</p>
-      </div>
+      <p className="text-blue-700 text-center py-10">
+        No employer profile data found
+      </p>
     );
+  }
 
   const emp = profile.employer || {};
   const address = profile.address || {};
 
   return (
-    <div className=" bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4">
-      <div className=" mx-auto">
-        {/* Header Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-8 mb-6 text-left">
-          <div className="flex items-center gap-6">
-            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-blue-600 text-4xl font-bold shadow-xl">
+    <>
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 text-left">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-full flex items-center justify-center text-blue-600 text-3xl sm:text-4xl font-bold shadow-xl flex-shrink-0">
               {safe(emp.companyName).charAt(0)}
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">
                 {profile.firstName} {profile.lastName}
-              </h1>
-              <p className="text-blue-100 text-lg mb-2">
+              </h2>
+              <p className="text-blue-100 text-base sm:text-lg mb-2">
                 {safe(emp.companyName)}
               </p>
               <span
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${
+                className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold ${
                   profile.is_active
                     ? "bg-green-500 text-white"
                     : "bg-red-500 text-white"
                 }`}
               >
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 {profile.is_active ? "Active Account" : "Inactive Account"}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[56.5vh] overflow-y-scroll custom-scrollbar text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 text-left pb-4">
           {/* LEFT COLUMN - Personal Info */}
           <div className="lg:col-span-1 space-y-6">
             {/* Personal Information */}
@@ -301,8 +290,7 @@ const EmployerProfile = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 

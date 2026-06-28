@@ -276,6 +276,7 @@ import {
   FaUserShield,
 } from "react-icons/fa";
 import { getUserProfilewith } from "../api/service2";
+import { DashboardLoader } from "../components/dashboard/DashboardUI";
 
 const DashboardContent = () => {
   const [profile, setProfile] = useState(null);
@@ -313,25 +314,11 @@ const DashboardContent = () => {
     fetchUserProfile();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col justify-center items-center h-[80vh] bg-gradient-to-br from-blue-50 to-indigo-50">
-        {/* Spinner */}
-        <div className="w-14 h-14 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-
-        {/* Text */}
-        <p className="text-xl text-blue-600 font-semibold">
-          Loading profile...
-        </p>
-      </div>
-    );
-  }
+  if (loading) return <DashboardLoader message="Loading profile..." />;
 
   if (!profile) {
     return (
-      <div className="flex justify-center items-center bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div className="text-xl text-blue-600">No profile data found</div>
-      </div>
+      <p className="text-blue-700 text-center py-10">No profile data found</p>
     );
   }
 
@@ -348,9 +335,8 @@ const DashboardContent = () => {
   );
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-4 sm:p-6 text-start">
-      {/* HEADER */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-6 sm:p-8 mb-6 text-left">
+    <>
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 text-left">
         <div className="flex items-center gap-6">
           {/* AVATAR */}
           <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-full flex items-center justify-center text-blue-600 text-3xl sm:text-4xl font-bold shadow-xl">
@@ -360,9 +346,9 @@ const DashboardContent = () => {
 
           {/* TEXT */}
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">
               {profile.firstName} {profile.lastName}
-            </h1>
+            </h2>
 
             <p className="text-blue-100 text-sm sm:text-lg mb-2">
               {profile.role?.replace("_", " ")}
@@ -383,7 +369,7 @@ const DashboardContent = () => {
         </div>
       </div>
 
-      <div className="space-y-6 h-[55vh] overflow-y-auto">
+      <div className="space-y-4 sm:space-y-6 pb-4">
         {/* ROW 1 → PERSONAL + ADDRESS */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* PERSONAL INFO */}
@@ -450,7 +436,7 @@ const DashboardContent = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
